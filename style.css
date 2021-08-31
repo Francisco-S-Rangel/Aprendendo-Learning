@@ -1,3 +1,6 @@
+body{
+    background-color: rgb(248, 246, 213);
+}
 .container-1, .container-2, .container-3{
     border: 1px solid black;
     width: 75%;
@@ -41,5 +44,5 @@
     border-radius: 5px 5px 5px 5px;
 }
 .flex-box-rps img:hover{
-    box-shadow: 0px 10px 50px green;
+    box-shadow: 0px 10px 50px rgb(48, 89, 223);
 }
