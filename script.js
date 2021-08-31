@@ -29,13 +29,48 @@ function deleteCat(){
     img_ch_2.parentNode.removeChild(img_ch_2);
     aux=0;
 }
-// Challende 3: Rock,Paper,Scissors.
+// Challenge 3: Rock,Paper,Scissors.
 
 function rpsGame(yourChoice){
-    console.log(yourChoice.id);
-    var humanChoice,botChoice;
-    humanChoice=yourChoice.id;
-    results = decideWinner(humanChoice,botChoice);
-    var message = finalmessage(result);
-    rpsFrontEnd(yourChoice,botChoice,message);
+    var humanChoice= yourChoice.id;
+    var botChoice = numberToChoice(ranToRpsInt());
+    result = decideWinner(humanChoice,botChoice);
+    message = finalmessage(result);
+    console.log(message);
+    //var message = finalmessage(result);
+    //rpsFrontEnd(yourChoice,botChoice,message);
+}
+function ranToRpsInt(){
+    return Math.floor(Math.random()*3);
+}
+function numberToChoice(number){
+    if (number==0){
+        return 'rock';
+    }else if (number==1){
+        return 'paper';
+    }else{
+        return 'scissors';
+    }
+}
+function decideWinner(yourChoice,computerChoice){
+    var dataBaserps = {
+        'rock' :{'scissors' : 1,'rock' : 0.5,'paper': 0},
+        'paper' :{'rock' : 1,'paper': 0.5, 'scissors' : 0},
+        'scissors':{'paper': 1,"scissors": 0.5,"rock": 0}
+    };
+    var yourScore = dataBaserps[yourChoice][computerChoice];
+    var computerScore = dataBaserps[computerChoice][yourChoice];
+
+    return [yourScore,computerScore];
+}
+function finalmessage([yourscore,computerscore]){
+    console.log(yourscore);
+    console.log(computerscore);
+      if(yourscore==0){
+          return {"message":"You Lose !","color":"red"};
+      }else if(computerscore==0){
+          return {"message":"You won !","color":"green"};
+      }else{
+          return {"message":"You tied !","color":"blue"};
+       }
 }
