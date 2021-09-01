@@ -1,7 +1,7 @@
 body{
     background-color: rgb(248, 246, 213);
 }
-.container-1, .container-2, .container-3{
+.container-1, .container-2, .container-3,.container-4{
     border: 1px solid black;
     width: 75%;
     margin: 0 auto;
@@ -34,6 +34,32 @@ body{
     background-color: red;
     border: none;
     color: white;
+    padding: 15px 36px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+}
+.btn-btn-head{
+    background-color: gold;
+    border: none;
+    color: black;
+    padding: 15px 36px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+}
+.btn-btn-tail {
+    background-color: silver;
+    border: none;
+    color: rgb(87, 64, 219);
     padding: 15px 36px;
     text-align: center;
     text-decoration: none;
