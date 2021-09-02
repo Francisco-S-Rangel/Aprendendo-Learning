@@ -118,14 +118,55 @@ function play_again(){
 }
 // Challenge 4: Coin flipping.
 function coinGame(yourClick){
+    reset_button();
     var coin_played = Math.floor(Math.random()*2);
     var userChoice = yourClick.id;
     var coinChoice;
-    console.log(userChoice);
+    var message;
+    var ImageDiv = document.createElement("div");
+    var MessageDiv =document.createElement("div");
     if(userChoice== "headbtn"){
         coinChoice=0;
     }else if(userChoice== "tailbtn"){
         coinChoice=1;
     }
-    console.log(coinChoice);
+    if(coinChoice==coin_played){
+        message = "You hit it!";
+        MessageDiv.innerHTML ="<h1 style= 'color: green'; font-size: 60px; padding: 30px;>"+ message + "</h1>";
+        document.getElementById("flex-box-coinflipping-div").appendChild(MessageDiv);
+    } else{
+        message ="You missed it!"
+        MessageDiv.innerHTML = "<h1 style= 'color: red'; font-size: 60px; padding: 30px;>" + message + "</h1>";
+        document.getElementById("flex-box-coinflipping-div").appendChild(MessageDiv);
+    }
+    if(coin_played==0){
+        ImageDiv.innerHTML =  "<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Presidential_dollar_coin_reverse.png/477px-Presidential_dollar_coin_reverse.png' height=150 width=150 style='box-shadow: 0px 10px 50px rgb(192,192,192)'>";
+        document.getElementById("flex-box-coinflipping-div").appendChild(ImageDiv);
+    }else if(coin_played==1){
+        ImageDiv.innerHTML =  "<img src='https://upload.wikimedia.org/wikipedia/commons/f/fe/Sacagawea_dollar_obverse.png' height=150 width=150 style='box-shadow: 0px 10px 50px rgb(192,192,192)'>";
+        document.getElementById("flex-box-coinflipping-div").appendChild(ImageDiv);
+    }
+    
+    let btn_aux = document.createElement("button");
+    btn_aux.innerHTML = "Play again";
+    document.getElementById('flex-aux-coinflipping-div').appendChild(btn_aux);
+    btn_aux.style =  "background-color: rgb(0,128,0);  padding: 15px 36px; text-align: center; color: white; border: none; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 5px 5px 5px 5px;";
+    btn_aux.onclick = function(){
+        MessageDiv.parentNode.removeChild(MessageDiv);
+        ImageDiv.parentNode.removeChild(ImageDiv);
+        flip_again();
+        btn_aux.parentNode.removeChild(btn_aux);
+    };
+}
+function reset_button(){
+    document.getElementById("headbtn").remove();
+    document.getElementById("tailbtn").remove();
+}
+function flip_again(){
+    const text_coin = document.querySelector(".flex-box-coinflipping");
+    text_coin.insertAdjacentHTML(
+        "beforeend",
+        `<button class="btn-btn-head" id="headbtn" onclick="coinGame(this)">Head.</button>
+        <button class="btn-btn-tail" id="tailbtn" onclick="coinGame(this)">Tail.</button>`
+    );
 }
