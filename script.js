@@ -20,7 +20,7 @@ function generateCat(){
     if(aux==0){
     img_ch_2 = document.createElement("img");
     var div = document.getElementById("flex-cat-gen");
-    img_ch_2.src= "https://cdn.pixabay.com/photo/2013/11/22/23/07/kitten-216019_960_720.jpg";
+    img_ch_2.src= randomCat();
     div.appendChild(img_ch_2);
     aux=1;
     }
@@ -28,6 +28,20 @@ function generateCat(){
 function deleteCat(){
     img_ch_2.parentNode.removeChild(img_ch_2);
     aux=0;
+}
+function randomCat(){
+    let cat = Math.floor(Math.random()*5);
+    if( cat==0){
+          return "https://deliriumnerd.com/wp-content/uploads/2020/04/myroommateisacat2.jpg";
+    }else if( cat==1){
+        return "https://img.poki.com/cdn-cgi/image/quality=78,width=600,height=600,fit=cover,g=0.5x0.5,f=auto/b5bd34054bc849159d949d50021d8926.png";
+    }else if( cat== 2){
+        return "https://cdn.pixabay.com/photo/2013/11/22/23/07/kitten-216019_960_720.jpg";
+    }else if(cat ==3){
+        return "https://assets.b9.com.br/wp-content/uploads/2011/10/gato.jpg";
+    }else{
+        return "https://observatoriodocinema.uol.com.br/wp-content/uploads/2021/05/Meowth_Team_Rocket.jpg";
+    }
 }
 // Challenge 3: Rock,Paper,Scissors.
 
@@ -169,4 +183,75 @@ function flip_again(){
         `<button class="btn-btn-head" id="headbtn" onclick="coinGame(this)">Head.</button>
         <button class="btn-btn-tail" id="tailbtn" onclick="coinGame(this)">Tail.</button>`
     );
+}
+// Challenge 5: Change the Color of All Buttons!
+
+var all_buttons = document.getElementsByTagName('button');
+
+function buttonColorChange(buttonthingy){
+    if(buttonthingy.value === 'red'){
+        buttonsRed();
+    }else if(buttonthingy.value === 'green'){
+        buttonsGreen();
+    }else if(buttonthingy.value === 'yellow'){
+        buttonsYellow();
+    }else if(buttonthingy.value === 'blue'){
+        buttonsBlue();
+    }else if(buttonthingy.value === 'null'){
+        buttonNULL();
+    }else if(buttonthingy.value === 'random'){
+        buttonRandom();
+    }else if(buttonthingy.value === 'reset'){
+         colorReset();
+    }
+
+}
+
+function buttonsRed(){
+    for(let i=0;i<all_buttons.length;i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+        all_buttons[i].classList.add("btn-danger");
+    }
+}
+function buttonsGreen(){
+    for(let i=0;i<all_buttons.length;i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+        all_buttons[i].classList.add("btn-success");
+    }
+}
+function buttonsYellow(){
+    for(let i=0;i<all_buttons.length;i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+        all_buttons[i].classList.add("btn-warning");
+    }
+}
+function buttonsBlue(){
+    for(let i=0;i<all_buttons.length;i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+        all_buttons[i].classList.add("btn-primary");
+    }
+}
+function buttonNULL(){
+    for(let i=0;i<all_buttons.length;i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+    }
+}
+function buttonRandom(){
+    var choices = ['btn-primary','btn-danger','btn-success','btn-warning'];
+    var aux_0;
+    for(let i=0;i<all_buttons.length;i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+        aux_0 = random_aux();
+        all_buttons[i].classList.add(choices[aux_0]);
+    }
+}
+function random_aux(){
+       return Math.floor(Math.random()*3);
+}
+function colorReset(){
+    var copyallbuttons = ['btn-primary','btn-danger','btn-success','btn-danger','btn-sucess','btn-sucess','btn-primary','btn-danger','btn-warning','btn-success'];
+    for(let i=0;i <all_buttons.length;i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+        all_buttons[i].classList.add(copyallbuttons[i]);
+    }
 }
