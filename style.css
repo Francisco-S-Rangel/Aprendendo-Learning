@@ -1,19 +1,31 @@
 body{
     background-color: rgb(248, 246, 213);
 }
-.container-1, .container-2, .container-3,.container-4,.container-5{
+.container-1, .container-2, .container-3,.container-4,
+.container-5,.container-6{
     border: 1px solid black;
     width: 75%;
     margin: 0 auto;
     text-align: center;
 }
-.flex-box-container-1, .flex-box-container-2, .flex-box-rps, .flex-box-pick-color{
+.flex-box-container-1, .flex-box-container-2, .flex-box-rps, 
+.flex-box-pick-color,.flex-blackjack-row-1,.flex-blackjack-row-2{
     display: flex;
     border: 1px solid black;
     padding: 10px;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
+}
+.flex-blackjack-row-1,.flex-blackjack-row-2{
+    background: url('https://media.istockphoto.com/vectors/poker-table-background-in-green-color-vector-id1218355494?k=20&m=1218355494&s=612x612&w=0&h=7izk2bQU_LDnKLLLbwAolAo4kwUmcwr_mo8_Vr7955w=') center;
+    color:white;
+}
+.flex-blackjack-row-1 div{
+    border: 1px solid black;
+    padding: 10px;
+    height: 350px;
+    text-align: center;
 }
 .flex-box-container-1 div, .flex-box-container-2 div{
     padding:10px;

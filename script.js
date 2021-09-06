@@ -255,3 +255,4 @@ function colorReset(){
         all_buttons[i].classList.add(copyallbuttons[i]);
     }
 }
+//Challenge 6= Blackjack.
