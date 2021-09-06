@@ -256,3 +256,30 @@ function colorReset(){
     }
 }
 //Challenge 6= Blackjack.
+let blackjack = {
+    'you' : { 'scoreSpan': '#your-blackjack-result', 'div': '#your-box', 'score': 0},
+    'dealer' : {'scoreSpan': '#dealer-blackjack-result', 'div':'#dealer-box', 'score': 0},
+};
+const YOU = blackjack['you'];
+const DEALER = blackjack['dealer'];
+//the command bellow allow us to insert a song in our pag!!
+const hitSound = new Audio("sounds/swish.m4a");
+
+document.querySelector("#blackjack-hit-button").addEventListener('click', blackjackhit);
+document.querySelector("#blackjack-deal-button").addEventListener('click', BlackjackDealer);
+//function that control your moves !!
+function blackjackhit(){
+    showCard(YOU);
+}
+function showCard(activePlayer){
+    let cardImage = document.createElement('img');
+    cardImage.src = "images/Q.png";
+    document.querySelector(activePlayer['div']).appendChild(cardImage);
+    hitSound.play();
+}
+//function that control the Deal!!
+function BlackjackDealer(){
+    let yourimages = document.querySelector('#your-box').querySelectorAll('img');
+    console.log(yourimages);
+}
+
