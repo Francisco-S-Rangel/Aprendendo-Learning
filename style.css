@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(248, 246, 213);
+    background-color: rgb(126, 13, 13);
 }
 .container-1, .container-2, .container-3,.container-4,
 .container-5,.container-6{
@@ -7,6 +7,7 @@ body{
     width: 75%;
     margin: 0 auto;
     text-align: center;
+    background-color: rgb(248, 246, 213);;
 }
 .flex-box-container-1, .flex-box-container-2, .flex-box-rps, 
 .flex-box-pick-color,.flex-blackjack-row-1,.flex-blackjack-row-2,

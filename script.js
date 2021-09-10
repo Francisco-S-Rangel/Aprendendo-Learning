@@ -1,15 +1,28 @@
  // Challenge 1: Your age in Days.
 function ageInDays(){
 var birthYear;
-birthYear = Number(window.prompt("What year were you born my friend ?"));
-var age_in_Days = (2021 -birthYear) * 365;
+var month;
+var day;
+day = Number(window.prompt("What day were you born my friend ?"));
+month = Number(window.prompt("Now the Month ?"));
+birthYear = Number(window.prompt("Now the Year ?"));
+
+var age_in_Days = calculo(day,month,birthYear);
+console.log(ageInDays);
 var h1 = document.createElement("h1");
 var textAnswer = document.createTextNode("You are " + age_in_Days + " days old");
 h1.setAttribute ("id","age_in_Days");
 h1.appendChild(textAnswer);
 document.getElementById("flex-box-result").appendChild(h1);
 }
+function calculo(day,month,year){
+data = new Date();
+let y= (data.getFullYear()-year) * 365;
+let m = ((data.getMonth()-month)+1) * 30;
+let d = (data.getDate()-day);
 
+return d + m + y;
+}
 function reset(){
 document.getElementById("age_in_Days").remove();
 }
@@ -261,6 +274,9 @@ let blackjack = {
     'dealer' : {'scoreSpan': '#dealer-blackjack-result', 'div':'#dealer-box', 'score': 0},
     'cards' : ['2','3','4','5','6','7','8','9','10','K','J','Q','A'],
     'cardsMap' : {'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'K':10,'J':10,'Q':10,'A': [1,11]},
+    'wins' : 0,
+    'losses' : 0,
+    'draws' : 0,
 };
 const YOU = blackjack['you'];
 const DEALER = blackjack['dealer'];
@@ -294,7 +310,6 @@ function showCard(activePlayer,card){
 }
 //function that control the Deal!!
 function BlackjackDealer(){
-    ShowResult(TheWinner());
     let yourimages = document.querySelector('#your-box').querySelectorAll('img');
     let dealerimages = document.querySelector('#dealer-box').querySelectorAll('img');
     console.log(yourimages);
@@ -310,6 +325,8 @@ function BlackjackDealer(){
     document.querySelector('#your-blackjack-result').style.color = 'white';
     document.querySelector('#dealer-blackjack-result').textContent =0;
     document.querySelector('#dealer-blackjack-result').style.color = 'white';
+    document.querySelector('#blackjack-result').textContent = 'Let´s play';
+    document.querySelector('#blackjack-result').style.color = 'black';
 }
 function updateScore(card,activePlayer){
     if(card==="A"){
@@ -334,42 +351,50 @@ function BlackjackStand(){
     showCard(DEALER,card);
     updateScore(card,DEALER);
     showScore(DEALER);
+    if(DEALER['score'] > 15){
+        ShowResult(TheWinner());
+    }
 }
 // the fuctions bellow is to know who won and losse the Game!!
+// update the wins, drews and losses.
 function TheWinner() {
     let winner;
+    
     if(YOU['score'] <= 21){
         if(YOU['score'] > DEALER['score'] || DEALER['score'] > 21 ){
-            console.log('You won!');
+            blackjack['wins']++;
             winner = YOU;
-        }else if(YOU['socre'] < DEALER['score']){
-            console.log('You Lost!');
+        }else if(YOU['score'] < DEALER['score']){
+            blackjack['losses']++;
             winner = DEALER;
         }else if(YOU['score'] === DEALER['score']){
-            console.log('You drew!');
+            blackjack['draws']++;
         }
     } else if(YOU['score'] > 21 && DEALER['score'] <=21){
-            console.log('You Lost!');
+            blackjack['losses']++;
             winner = DEALER;
     }else if(YOU['score'] >21 && DEALER['score'] >21){
-        console.log('You drew!');
+        blackjack['draws']++;
     }
 
-    console.log('The winner is ',winner);
+    console.log(blackjack);
     return winner;
 }
 function ShowResult(winner){
    let message, messageColor;
 
    if(winner === YOU){
+       document.querySelector('#wins').textContent = blackjack['wins'];
        message = 'You Won!';
        messageColor = 'green';
        winSound.play();
    } else if(winner === DEALER){
+       document.querySelector('#losses').textContent = blackjack['losses']; 
        message = 'You Lost!';
        messageColor = 'red';
        lossSound.play();
    } else {
+       document.querySelector('#draws').textContent = blackjack['draws'];
        message = 'You drew!';
        messageColor = 'orange';
    }
