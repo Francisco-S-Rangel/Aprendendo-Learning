@@ -262,7 +262,8 @@ function random_aux(){
        return Math.floor(Math.random()*3);
 }
 function colorReset(){
-    var copyallbuttons = ['btn-primary','btn-danger','btn-success','btn-danger','btn-sucess','btn-sucess','btn-primary','btn-danger','btn-warning','btn-success'];
+    var copyallbuttons = ['btn-primary','btn-danger','btn-success','btn-danger','btn-sucess','btn-sucess','btn-primary',
+    'btn-danger','btn-warning','btn-success','btn-primary','btn-warning','btn-danger'];
     for(let i=0;i <all_buttons.length;i++){
         all_buttons[i].classList.remove(all_buttons[i].classList[1]);
         all_buttons[i].classList.add(copyallbuttons[i]);
@@ -277,6 +278,8 @@ let blackjack = {
     'wins' : 0,
     'losses' : 0,
     'draws' : 0,
+    'isHit' : false,
+    'isStand' : false,
 };
 const YOU = blackjack['you'];
 const DEALER = blackjack['dealer'];
@@ -290,11 +293,13 @@ document.querySelector('#blackjack-stand-button').addEventListener('click', Blac
 document.querySelector("#blackjack-deal-button").addEventListener('click', BlackjackDealer);
 //function that control your moves !!
 function Blackjackhit(){
+    if(blackjack['isStand'] === false){
     let card = randomCard();
     showCard(YOU,card);
     updateScore(card,YOU);
     showScore(YOU);
-    
+    blackjack['isHit'] = true;
+    }    
 }
 function randomCard(){
     let randomIndex = Math.floor(Math.random()*13);
@@ -310,6 +315,7 @@ function showCard(activePlayer,card){
 }
 //function that control the Deal!!
 function BlackjackDealer(){
+    if(blackjack['isHit']=== true && blackjack['isStand'] === true){
     let yourimages = document.querySelector('#your-box').querySelectorAll('img');
     let dealerimages = document.querySelector('#dealer-box').querySelectorAll('img');
     console.log(yourimages);
@@ -327,6 +333,9 @@ function BlackjackDealer(){
     document.querySelector('#dealer-blackjack-result').style.color = 'white';
     document.querySelector('#blackjack-result').textContent = 'Let´s play';
     document.querySelector('#blackjack-result').style.color = 'black';
+    blackjack['isHit'] = false;
+    blackjack['isStand'] = false;
+}
 }
 function updateScore(card,activePlayer){
     if(card==="A"){
@@ -345,15 +354,29 @@ function showScore(activePlayer){
     document.querySelector(activePlayer['scoreSpan']).textContent = activePlayer['score'];
     }
 }
+/* this function determines the time that the while loop on the function 
+BlackjackSatnd will take in order that the dealer play doesnt not look weird !!*/
+function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 // the function bellow represents the dealer(computer) logic !!
-function BlackjackStand(){
+async function BlackjackStand(){
+    if(blackjack['isStand'] === false && blackjack['isHit']===true){
+    blackjack['isStand'] = true;
+    while(DEALER['score'] <16){
     let card = randomCard();
     showCard(DEALER,card);
     updateScore(card,DEALER);
     showScore(DEALER);
-    if(DEALER['score'] > 15){
+    if(DEALER['score'] > 16){
         ShowResult(TheWinner());
     }
+    /* this comand bellow belong to the function sleep and this determine the
+     time that this loop is gonna take to go to the next position, in this
+     case is 1000 miliseconds!!!*/
+    await sleep(1000);
+   }
+ }
 }
 // the fuctions bellow is to know who won and losse the Game!!
 // update the wins, drews and losses.
@@ -402,3 +425,4 @@ function ShowResult(winner){
    document.querySelector('#blackjack-result').textContent = message;
    document.querySelector('#blackjack-result').style.color = messageColor;
 }
+
