@@ -198,7 +198,6 @@ function flip_again(){
     );
 }
 // Challenge 5: Change the Color of All Buttons!
-
 var all_buttons = document.getElementsByTagName('button');
 
 function buttonColorChange(buttonthingy){
@@ -219,7 +218,6 @@ function buttonColorChange(buttonthingy){
     }
 
 }
-
 function buttonsRed(){
     for(let i=0;i<all_buttons.length;i++){
         all_buttons[i].classList.remove(all_buttons[i].classList[1]);
